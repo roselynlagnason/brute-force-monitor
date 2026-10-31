@@ -4,3 +4,6 @@ data
 .env
 events.json
 events.json.imported
+
+.vercel
+.env*
