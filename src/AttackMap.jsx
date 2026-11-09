@@ -44,11 +44,11 @@ export default function AttackMap({ events, height = 360, onSelect }) {
     layer.clearLayers();
     points.forEach(p => {
       const hostile = p.bad > 0;
-      const color = hostile ? "#e5484d" : "#30a46c";
+      const color = hostile ? "#ff6b81" : "#4ade80";
       const r = Math.min(8 + Math.sqrt(p.total) * 4, 30);
       L.circleMarker([p.lat, p.lon], { radius: r + 8, color, weight: 0, fillColor: color, fillOpacity: 0.15 }).addTo(layer);
       L.circleMarker([p.lat, p.lon], { radius: r, color: "#fff", weight: 2, fillColor: color, fillOpacity: 0.85 })
-        .bindPopup(`<div class="map-pop"><b>${esc(p.ip)}</b><span>${esc(p.isp)}</span><span>${esc(p.location)}</span><hr/><span>${p.total} event${p.total > 1 ? "s" : ""} &middot; <b style="color:#e5484d">${p.bad} failed</b></span><span>Usernames: ${esc([...p.users].slice(0, 4).join(", ") || "—")}</span>${onSelectRef.current ? `<button class="map-pop-btn" data-ip="${esc(p.ip)}">View IP details</button>` : ""}</div>`)
+        .bindPopup(`<div class="map-pop"><b>${esc(p.ip)}</b><span>${esc(p.isp)}</span><span>${esc(p.location)}</span><hr/><span>${p.total} event${p.total > 1 ? "s" : ""} &middot; <b style="color:#ff6b81">${p.bad} failed</b></span><span>Usernames: ${esc([...p.users].slice(0, 4).join(", ") || "—")}</span>${onSelectRef.current ? `<button class="map-pop-btn" data-ip="${esc(p.ip)}">View IP details</button>` : ""}</div>`)
         .on("popupopen", (e) => {
           const btn = e.popup.getElement()?.querySelector(".map-pop-btn");
           if (btn) btn.onclick = () => onSelectRef.current?.(btn.dataset.ip);

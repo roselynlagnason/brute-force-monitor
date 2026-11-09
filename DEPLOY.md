@@ -1,4 +1,4 @@
-# Deploying LoginGuard
+# Deploying Vigilix
 
 In production **one Node process does everything**: it serves the built React app and the API, and stores data in SQLite. The map and ISP data only become meaningful once the app is reachable from the public internet.
 

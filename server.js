@@ -1,4 +1,4 @@
-// LoginGuard backend.
+// Vigilix backend.
 // - records the real IP / ISP / location of every visit and login attempt (SQLite)
 // - enforces rate limiting + lockouts on the server, supports admin IP blocking
 // - sends alerts (Discord / Telegram / webhook), serves the admin API and the built React app
@@ -148,7 +148,7 @@ async function maybeAlert(ip, geo) {
   const fails = q.allFailsIp.get(ip, sinceIso(ALERT_WINDOW_MS)).c;
   if (fails < ALERT_THRESHOLD || q.alertRecent.get(ip, sinceIso(ALERT_COOLDOWN_MS))) return;
   const where = [geo.city, geo.country].filter(Boolean).join(", ") || "unknown location";
-  const message = `LoginGuard alert: ${ip} (${geo.isp || "unknown ISP"}, ${where}) made ${fails} failed logins in the last ${Math.round(ALERT_WINDOW_MS / 60000)} minutes.`;
+  const message = `Vigilix alert: ${ip} (${geo.isp || "unknown ISP"}, ${where}) made ${fails} failed logins in the last ${Math.round(ALERT_WINDOW_MS / 60000)} minutes.`;
   q.alertInsert.run(new Date().toISOString(), ip, message, "");   // reserve first so concurrent attempts don't double-alert
   const sent = await sendAlert(message);
   db.prepare("UPDATE alerts SET sent=? WHERE id=(SELECT MAX(id) FROM alerts WHERE ip=?)").run(sent.join(", ") || "dashboard only", ip);
@@ -380,7 +380,7 @@ http.createServer(async (req, res) => {
       }
 
       if (m === "POST" && pathname === "/api/admin/test-alert") {
-        const sent = await sendAlert("LoginGuard test alert: your alert channel is working.");
+        const sent = await sendAlert("Vigilix test alert: your alert channel is working.");
         return send(res, 200, { sent });
       }
       return send(res, 404, { error: "Not found" });
@@ -392,4 +392,4 @@ http.createServer(async (req, res) => {
     console.error(err);
     if (!res.headersSent) send(res, 500, { error: "Server error" });
   }
-}).listen(PORT, "0.0.0.0", () => console.log(`LoginGuard API listening on http://localhost:${PORT}`));
+}).listen(PORT, "0.0.0.0", () => console.log(`Vigilix API listening on http://localhost:${PORT}`));

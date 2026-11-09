@@ -1,4 +1,4 @@
-# LoginGuard — Brute Force Monitor
+# Vigilix — Brute Force Monitor
 
 A login page that records **who is visiting and trying to sign in** (IP address, ISP, location), plus an admin console to investigate and block them.
 

@@ -144,7 +144,7 @@ export default function Admin({ onSignOut }) {
 
   return <div className={`admin-shell ${dark ? "dark" : ""}`}>
     <aside className={`sidebar ${mobileMenu ? "open" : ""}`}>
-      <div className="side-brand"><div className="logo"><ShieldCheck size={22} /></div><div><b>LoginGuard</b><small>SECURITY CONSOLE</small></div><button className="mobile-close" onClick={() => setMobileMenu(false)} aria-label="Close menu"><X /></button></div>
+      <div className="side-brand"><div className="logo"><ShieldCheck size={22} /></div><div><b>Vigilix</b><small>SECURITY CONSOLE</small></div><button className="mobile-close" onClick={() => setMobileMenu(false)} aria-label="Close menu"><X /></button></div>
       <div className="nav-label">MONITORING</div>
       {TABS.map(name => { const Icon = TAB_ICONS[name]; return <button key={name} className={`nav-item ${tab === name ? "selected" : ""}`} onClick={() => { setTab(name); setMobileMenu(false); }}>
         <Icon size={18} /><span>{name}</span>
@@ -206,7 +206,7 @@ export default function Admin({ onSignOut }) {
             : <div className="empty-state"><ShieldCheck size={26} /><b>No blocked IPs</b><span>Open an IP's details and choose “Block this IP”, or add one above.</span></div>}</section>}
 
         {tab === "Alerts" && <>
-          <section className="content-card activity-page"><div className="card-head"><div><h2>Alert channels</h2><p>Where LoginGuard sends a message when an IP crosses the threshold ({meta.config.alertThreshold ?? 10} failures in {meta.config.alertWindowMin ?? 5} min).</p></div></div>
+          <section className="content-card activity-page"><div className="card-head"><div><h2>Alert channels</h2><p>Where Vigilix sends a message when an IP crosses the threshold ({meta.config.alertThreshold ?? 10} failures in {meta.config.alertWindowMin ?? 5} min).</p></div></div>
             <div className="channels">{[["discord", "Discord"], ["telegram", "Telegram"], ["webhook", "Webhook (Slack-compatible)"]].map(([k, l]) => <span key={k} className={`chip ${meta.channels[k] ? "ok" : ""}`}>{meta.channels[k] ? <CheckCircle2 size={12} /> : <XCircle size={12} />} {l}: {meta.channels[k] ? "connected" : "not set"}</span>)}</div>
             <div className="card-pad"><button className="outline-btn" onClick={testAlert}><Bell size={15} /> Send test alert</button> {testMsg && <span className="test-msg">{testMsg}</span>}
               <p className="hint">Set <code>DISCORD_WEBHOOK_URL</code>, <code>TELEGRAM_BOT_TOKEN</code> + <code>TELEGRAM_CHAT_ID</code>, or <code>ALERT_WEBHOOK_URL</code> in your <code>.env</code> file, then restart the server. Alerts always appear in the list below.</p></div></section>
@@ -215,7 +215,7 @@ export default function Admin({ onSignOut }) {
               : <div className="empty-state"><Bell size={26} /><b>No alerts yet</b><span>An alert is created when one IP reaches {meta.config.alertThreshold ?? 10} failed logins within {meta.config.alertWindowMin ?? 5} minutes.</span></div>}</section>
         </>}
 
-        <div className="footer-note"><ShieldCheck size={15} /> LoginGuard · session signs out after {meta.config.idleMin ?? 15} minutes of inactivity.</div>
+        <div className="footer-note"><ShieldCheck size={15} /> Vigilix · session signs out after {meta.config.idleMin ?? 15} minutes of inactivity.</div>
       </div>
     </main>
     {selectedIp && <IpDetails ip={selectedIp} onClose={() => setSelectedIp(null)} onChanged={() => load(true)} />}

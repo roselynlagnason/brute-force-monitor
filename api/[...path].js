@@ -168,7 +168,7 @@ export default async function handler(req, res) {
       if (error) throw error;
       return json(res, 200, {
         success: true,
-        message: "LoginGuard API is connected to Supabase!",
+        message: "Vigilix API is connected to Supabase!",
       });
     }
 
@@ -369,7 +369,7 @@ export default async function handler(req, res) {
 
       if (method === "POST" && pathname === "/api/admin/test-alert") {
         const sent = await sendAlert(
-          "LoginGuard test alert: your alert channel is working."
+          "Vigilix test alert: your alert channel is working."
         );
         return json(res, 200, { sent });
       }
@@ -382,7 +382,7 @@ export default async function handler(req, res) {
     }
     return json(res, 404, { error: "Not found" });
   } catch (error) {
-    console.error("LoginGuard API error:", error);
+    console.error("Vigilix API error:", error);
     return json(res, 500, { error: "Server error" });
   }
 }

@@ -26,7 +26,7 @@ function MiniMap({ lat, lon }) {
   useEffect(() => {
     const map = L.map(el.current, { zoomControl: true, scrollWheelZoom: false }).setView([lat, lon], 9);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors", maxZoom: 18 }).addTo(map);
-    L.circleMarker([lat, lon], { radius: 9, color: "#fff", weight: 3, fillColor: "#e5484d", fillOpacity: 1 }).addTo(map);
+    L.circleMarker([lat, lon], { radius: 9, color: "#fff", weight: 3, fillColor: "#ff6b81", fillOpacity: 1 }).addTo(map);
     return () => map.remove();
   }, [lat, lon]);
   return <div ref={el} className="ipd-map" />;

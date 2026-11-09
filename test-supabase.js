@@ -11,7 +11,7 @@ try {
     throw error;
   }
 
-  console.log("SUCCESS: Connected to LoginGuard Supabase!");
+  console.log("SUCCESS: Connected to Vigilix Supabase!");
   console.log("Events table is accessible.");
   console.log("Test result:", data);
 } catch (error) {
