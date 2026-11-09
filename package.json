@@ -9,8 +9,8 @@
   "scripts": {
     "dev": "vite",
     "admin": "vite --port 5174 --strictPort --open /admin.html",
-    "server": "node server.js",
-    "start": "node server.js",
+    "server": "node dev-server.js",
+    "start": "node dev-server.js",
     "build": "vite build",
     "preview": "vite preview",
     "hash-password": "node hash-password.js"
